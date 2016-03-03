@@ -145,6 +145,7 @@
 			this.currentScale = this.getScale();
 
 			itemWidth = globalWidth / options.cols;
+			itemWidth -= (parseInt(this.$children.css('padding-left')) + parseInt(this.$children.css('padding-right')));
 
 			if (options.fluid) {
 				globalHeight = globalWidth / (options.width / options.height);
@@ -167,7 +168,7 @@
 				this.reload();
 			} else {
 				globalHeight -= (parseInt(this.$element.css('padding-top')) + parseInt(this.$element.css('padding-bottom')));
-				itemWidth -= (parseInt(this.$children.css('padding-left')) + parseInt(this.$children.css('padding-right')));
+
 				this.$element.height(globalHeight);
 				this.$children.width(itemWidth);
 
