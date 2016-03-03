@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>witySlider - Slideshow Fluid</title>
+		<meta charset="utf-8" />
+
+		<!-- Bootstrap -->
+		<link href="../../src/wityslider.css" rel="stylesheet" />
+
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script src="/yeswecar-site/libraries/IE-compatibility/html5shiv.min.js"></script>
+			<script src="/yeswecar-site/libraries/IE-compatibility/respond.min.js"></script>
+		<![endif]-->
+
+		<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			.slide {
+				padding: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="slideshow" data-wity-slider='{"width": 1920, "height": 560, "fluid": true, "controls": true, "pause": 4000, "speed": 1200, "auto": false, "bullet_point_position": "top-right"}'>
+			<div class="slide" style="background: red;">
+				<div class="slide-inner">
+					<div class="description">
+						<h2>Slide 1</h2>
+					</div>
+				</div>
+			</div>
+			<div class="slide" style="background: blue;">
+				<div class="slide-inner">
+					<div class="description">
+						<h2>Slide 1</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../src/wityslider.js"></script>
+	</body>
+</html>
