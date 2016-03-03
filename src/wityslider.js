@@ -134,7 +134,8 @@
 		}
 
 		Slider.prototype.resize = function() {
-			var globalWidth = this.$element[0].getBoundingClientRect().width, // Fixes jQuery rounding bug
+			var clientRect = this.$element[0].getBoundingClientRect(), // Fixes jQuery rounding bug
+				globalWidth = clientRect.right - clientRect.left,
 				globalHeight,
 				itemWidth,
 				itemHeight,
