@@ -85,14 +85,17 @@
 			this.$element = $(element);
 
 			this.options = function(newOpts) {
-				if (newOpts) {
-					// Store all options
-					_options = $.extend({}, defaults, newOpts);
+				var optsWithoutSpecifics;
 
-					// Calculate contextualized options
+				options = newOpts || options;
+
+				if (!_options || newOpts) {
+					_options = $.extend({}, defaults, options);
+				}
+
+				if (!_contextualizedOptions || newOpts) {
 					_contextualizedOptions = {};
-
-					var optsWithoutSpecifics = $.extend({}, _options);
+					optsWithoutSpecifics = $.extend({}, _options);
 					delete optsWithoutSpecifics.specifics;
 
 					$.each(_options.mediaScales, function(scale) {
