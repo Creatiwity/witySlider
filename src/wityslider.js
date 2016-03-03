@@ -495,7 +495,7 @@
 				$('body').on('touchend', unbindMove);
 			}
 
-			this.$element.trigger('ws.moved', [0]);
+			this.$element.trigger('ws.moved', [0, 0]);
 		};
 
 		Slider.prototype.left = function(index) {
@@ -606,7 +606,7 @@
 								that.ready = true;
 								that.setAutoNext();
 
-								that.$element.trigger('ws.moved', [page]);
+								that.$element.trigger('ws.moved', [parseInt($current.attr("data-wity-slider-index"), 10), page]);
 							}, 20);
 						}, that.options().speed);
 					}, 20);
