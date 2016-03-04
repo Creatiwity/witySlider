@@ -85,14 +85,17 @@
 			this.$element = $(element);
 
 			this.options = function(newOpts) {
-				if (newOpts) {
-					// Store all options
-					_options = $.extend({}, defaults, newOpts);
+				var optsWithoutSpecifics;
 
-					// Calculate contextualized options
+				options = newOpts || options;
+
+				if (!_options || newOpts) {
+					_options = $.extend({}, defaults, options);
+				}
+
+				if (!_contextualizedOptions || newOpts) {
 					_contextualizedOptions = {};
-
-					var optsWithoutSpecifics = $.extend({}, _options);
+					optsWithoutSpecifics = $.extend({}, _options);
 					delete optsWithoutSpecifics.specifics;
 
 					$.each(_options.mediaScales, function(scale) {
@@ -131,7 +134,8 @@
 		}
 
 		Slider.prototype.resize = function() {
-			var globalWidth = this.$element[0].getBoundingClientRect().width, // Fixes jQuery rounding bug
+			var clientRect = this.$element[0].getBoundingClientRect(), // Fixes jQuery rounding bug
+				globalWidth = clientRect.right - clientRect.left,
 				globalHeight,
 				itemWidth,
 				itemHeight,
@@ -141,6 +145,7 @@
 			this.currentScale = this.getScale();
 
 			itemWidth = globalWidth / options.cols;
+			itemWidth -= (parseInt(this.$children.css('padding-left')) + parseInt(this.$children.css('padding-right')));
 
 			if (options.fluid) {
 				globalHeight = globalWidth / (options.width / options.height);
@@ -163,7 +168,7 @@
 				this.reload();
 			} else {
 				globalHeight -= (parseInt(this.$element.css('padding-top')) + parseInt(this.$element.css('padding-bottom')));
-				itemWidth -= (parseInt(this.$children.css('padding-left')) + parseInt(this.$children.css('padding-right')));
+
 				this.$element.height(globalHeight);
 				this.$children.width(itemWidth);
 
@@ -490,7 +495,7 @@
 				$('body').on('touchend', unbindMove);
 			}
 
-			this.$element.trigger('ws.moved', [0]);
+			this.$element.trigger('ws.moved', [0, 0]);
 		};
 
 		Slider.prototype.left = function(index) {
@@ -601,7 +606,7 @@
 								that.ready = true;
 								that.setAutoNext();
 
-								that.$element.trigger('ws.moved', [page]);
+								that.$element.trigger('ws.moved', [parseInt($current.attr("data-wity-slider-index"), 10), page]);
 							}, 20);
 						}, that.options().speed);
 					}, 20);
